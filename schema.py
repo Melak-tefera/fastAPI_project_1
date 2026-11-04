@@ -13,3 +13,6 @@ class PostRead(BaseModel):
     title: str
     user_id: int
     model_config = ConfigDict(from_attributes=True)
+    
+class UserWithPosts(UserRead):
+    posts: list[PostRead] = []

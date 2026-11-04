@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from database import get_db
 from model import User, Post
-from schema import   PostRead, PostCreate
+from schema import   PostRead, PostCreate,UserWithPosts
 from sqlalchemy.orm import Session
 
 router= APIRouter(tags=["Posts"])
@@ -26,5 +26,11 @@ def create_post_for_user(id:int, name:PostCreate, db: Session=Depends(get_db)):
     db.commit()
     db.refresh(post)
     return post
+@router.get("/{user_id}", response_model=UserWithPosts)
+def get_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
 
     
