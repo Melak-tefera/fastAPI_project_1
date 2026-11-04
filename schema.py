@@ -5,6 +5,9 @@ class UserRead(BaseModel):
     name:str
     model_config= ConfigDict(from_attributes=True)
 
+class PostCreate(BaseModel):
+    title: str
+
 class PostRead(BaseModel):
     id: int
     title: str

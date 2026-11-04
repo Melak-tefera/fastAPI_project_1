@@ -11,7 +11,7 @@ class User(Base):
 class Post(Base):
     __tablename__="posts"
     id: Mapped[int]= mapped_column(primary_key=True)
-    post:Mapped[str]=mapped_column(String(100))
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    title:Mapped[str]=mapped_column(String(100))
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
     owner: Mapped["User"] = relationship(back_populates="posts") # Lets you write user.posts and post.owner
     
