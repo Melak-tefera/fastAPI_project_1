@@ -6,6 +6,7 @@ class User(Base):
     __tablename__ = "user"
     id: Mapped[int]= mapped_column(primary_key=True)
     name:Mapped[str]=mapped_column(String(100))
+    age: Mapped[int | None] = mapped_column(nullable=True)
     posts:Mapped[list["Post"]]=relationship(back_populates="owner") # Lets you write user.posts and post.owner
 
 class Post(Base):
