@@ -24,10 +24,3 @@ def create_user(name: UserRead, db: Session=Depends(get_db)):
 
 
 
-@router.post("",response_model=UserRead)
-def create_user(name: UserRead, db: Session=Depends(get_db)):
-    user=User(name=name.name)
-    db.add(user)
-    db.commit()
-    db.refresh(user)
-    return user
